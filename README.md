@@ -1,1 +1,1 @@
-# poti-assignment-1
+# POTI-Assignment-1
