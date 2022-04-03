@@ -1,0 +1,13 @@
+.left-frame {
+    background-color: #2D333B;
+    flex-basis: 10%;
+}
+
+.right-frame {
+    background-color: white;
+    flex-basis: auto;
+}
+
+.hide {
+    display: none;
+}
