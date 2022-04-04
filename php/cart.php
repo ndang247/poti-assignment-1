@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/bottomRight.css" />
+    <link rel="stylesheet" href="../css/cart.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
     <title>Shopping Cart</title>
 </head>
@@ -80,7 +80,7 @@
                     <h4>Product
                         <span class="float-end">Sub Total</span>
                     </h4>
-                    <form method="GET" action="checkout.php" target="top_right">
+                    <form method="POST" action="checkout.php" target="top-right">
                         <?php
                         $total = 0;
                         foreach ($_SESSION['cart'] as $item) {
@@ -99,13 +99,18 @@
                                         $total += $item['subTotal'];
                                     }
                                     echo "$" . $total;
+                                    $_SESSION['totalPrice'] = $total;
                                     ?>
                                 </b>
                             </span>
                         </p>
 
                         <div class="float-right">
-                            <input type="submit" class="btn btn-success" name="slcAction" value="Checkout">
+                            <?php
+                            isset($_SESSION['cart']) ? print "<input type='submit' class='btn btn-success' name='slcAction' value='Checkout'>"
+                                : print "<input type='submit' class='btn btn-success' name='slcAction' value='Checkout' disabled>";
+                            ?>
+                            <!-- <input type="submit" class="btn btn-success" name="slcAction" value="Checkout"> -->
                             <input type='submit' form="formClear" class='btn btn-danger' name='slcAction' value='Clear'>
                         </div>
                     </form>
