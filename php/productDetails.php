@@ -35,7 +35,7 @@
                 if ($num_rows > 0) {
                     // Prevent the form from submitting if validation is false
                     echo "<form method='POST' action='cart.php' target='bottom-right' onsubmit='return quantityValidation()'>
-                    <table class='table'>
+                    <table class='table table-sm'>
                         <thead class='table-dark'>
                             <tr>
                                 <th>Product Name</th>
@@ -43,6 +43,7 @@
                                 <th>Unit Quantity</th>
                                 <th>In Stock</th>
                                 <th>Purchase Quantity</th>
+                                <th>Action</th>
                             </tr>
                         </thead>";
                     if ($row = mysqli_fetch_assoc($result)) {
@@ -53,10 +54,16 @@
                         <td>" . $row['in_stock'] . "</td>
                         <td>
                             <input id='txtQuantity' type='text' class='form-control' placeholder='Quantity' name='purchaseQuantity' value=0 required>
-                            <input type='submit' class='btn btn-primary' name='add' value='Add'>
+                        </td>
+                        <td>
+                            <input type='submit' class='btn btn-primary float-end' name='slcAction' value='Add'>
                         </td>
                     </tr>";
                     }
+                    echo "<input name='productId' value=" . $_SESSION['product_id'] . " hidden>
+                    <input name='productName' value=\"" . $row['product_name'] . "\" hidden>
+                    <input name='unitPrice' value=" . $row['unit_price'] . " hidden>
+                    <input name='unitQuantity' value=\"" . $row['unit_quantity'] . "\" hidden>";
                     echo "</table>";
                     echo "</form>";
                 }
