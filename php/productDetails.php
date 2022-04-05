@@ -6,13 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <script src="https://kit.fontawesome.com/c818109c96.js" crossorigin="anonymous"></script>
     <title>Product Details</title>
 </head>
 
 <body>
     <div>
         <div>
-            <h1 class="text-center">Product Details</h1>
+            <h1>
+                <a href="#" class="d-flex justify-content-center align-items-center mb-md-0 text-dark text-decoration-none">
+                    <i class="fa-solid fa-circle-info"></i>
+                    &nbsp;
+                    <span>Product Details</span>
+                </a>
+            </h1>
             <?php
             session_start();
             if (isset($_GET['id'])) {
@@ -53,7 +60,7 @@
                         <td>" . $row['unit_quantity'] . "</td>
                         <td>" . $row['in_stock'] . "</td>
                         <td>
-                            <input id='txtQuantity' type='text' class='form-control' placeholder='Quantity' name='purchaseQuantity' value=0 required>
+                            <input id='txtQuantity' type='text' class='form-control' placeholder='Quantity' name='purchaseQuantity' value=1 required>
                         </td>
                         <td>
                             <input type='submit' class='btn btn-primary float-end' name='slcAction' value='Add'>

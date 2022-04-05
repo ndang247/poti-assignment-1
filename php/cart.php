@@ -83,10 +83,12 @@
                     <form method="POST" action="checkout.php" target="top-right">
                         <?php
                         $total = 0;
-                        foreach ($_SESSION['cart'] as $item) {
-                            echo "<p>" . $item['name'] . " * " . $item['purchase'] .
-                                "<span class='float-end'>" . "<b>" . "$" . $item['subTotal'] . "</b>" .
-                                "</span>" . "</p>";
+                        if (is_array($_SESSION['cart'])) {
+                            foreach ($_SESSION['cart'] as $item) {
+                                echo "<p>" . $item['name'] . " * " . $item['purchase'] .
+                                    "<span class='float-end'>" . "<b>" . "$" . $item['subTotal'] . "</b>" .
+                                    "</span>" . "</p>";
+                            }
                         }
                         ?>
                         <hr>
@@ -95,10 +97,12 @@
                             <span class="float-end">
                                 <b>
                                     <?php
-                                    foreach ($_SESSION['cart'] as $item) {
-                                        $total += $item['subTotal'];
+                                    if (is_array($_SESSION['cart'])) {
+                                        foreach ($_SESSION['cart'] as $item) {
+                                            $total += $item['subTotal'];
+                                        }
+                                        echo "$" . $total;
                                     }
-                                    echo "$" . $total;
                                     $_SESSION['totalPrice'] = $total;
                                     ?>
                                 </b>
@@ -107,11 +111,16 @@
 
                         <div class="float-right">
                             <?php
-                            isset($_SESSION['cart']) ? print "<input type='submit' class='btn btn-success' name='slcAction' value='Checkout'>"
-                                : print "<input type='submit' class='btn btn-success' name='slcAction' value='Checkout' disabled>";
+                            isset($_SESSION['cart'])
+                                ?
+                                print "<input type='submit' class='btn btn-success' name='slcAction' value='Checkout'>
+                            <input type='submit' form='formClear' class='btn btn-danger' name='slcAction' value='Clear'>"
+                                :
+                                print "<input type='submit' class='btn btn-success' name='slcAction' value='Checkout' disabled>
+                            <input type='submit' form='formClear' class='btn btn-danger' name='slcAction' value='Clear' disabled>";
                             ?>
                             <!-- <input type="submit" class="btn btn-success" name="slcAction" value="Checkout"> -->
-                            <input type='submit' form="formClear" class='btn btn-danger' name='slcAction' value='Clear'>
+                            <!-- <input type='submit' form="formClear" class='btn btn-danger' name='slcAction' value='Clear'> -->
                         </div>
                     </form>
                     <form id='formClear' method="POST" action="cart.php"></form>
