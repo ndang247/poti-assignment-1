@@ -95,7 +95,7 @@
                         </label>
                         <select class="form-select" name="state" required>
                             <option value="">Choose...</option>
-                            <option>NSW</option>
+                            <option>New South Wales</option>
                             <option>Victoria</option>
                             <option>Queensland</option>
                             <option>South Australia</option>
