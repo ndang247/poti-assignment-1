@@ -27,52 +27,55 @@
         <div>
             <?php
             session_start();
-            switch ($_POST['slcAction']) {
-                case 'Add':
-                    // If the session cart is not set then set the session cart to an empty array
-                    if (!isset($_SESSION['cart'])) $_SESSION['cart'] = array();
-                    // The $_SESSION['cart'] is a 2D array with each element being an array of 
-                    // product id, product name, unit price, unit quantity, purchase quantity and total price
-                    // Add the product to the session cart
-                    // First check if the item is already in the cart
-                    $itemFound = false;
-                    foreach ($_SESSION['cart'] as $item) {
-                        if ($item['id'] == $_POST['productId']) {
-                            $itemFound = true;
-                            break;
-                        }
-                    }
-                    // If the item is not in the cart then add it
-                    if (!$itemFound) {
-                        array_push($_SESSION['cart'], array(
-                            "id" => $_POST['productId'],
-                            "name" => $_POST['productName'],
-                            "price" => $_POST['unitPrice'],
-                            "quantity" => $_POST['unitQuantity'],
-                            "purchase" => $_POST['purchaseQuantity'],
-                            "subTotal" => $_POST['purchaseQuantity'] * $_POST['unitPrice']
-                        ));
-                    } else {
-                        // If the item is in the cart then update the purchase quantity
-                        for ($i = 0; $i < sizeof($_SESSION['cart']); $i++) {
-                            if ($_SESSION['cart'][$i]['id'] == $_POST['productId']) {
-                                $_SESSION['cart'][$i]['purchase'] += $_POST['purchaseQuantity'];
-                                $_SESSION['cart'][$i]['subTotal'] = $_SESSION['cart'][$i]['purchase'] * $_SESSION['cart'][$i]['price'];
+            if (isset($_POST['slcAction'])) {
+                switch ($_POST['slcAction']) {
+                    case 'Add':
+                        // If the session cart is not set then set the session cart to an empty array
+                        if (!isset($_SESSION['cart'])) $_SESSION['cart'] = array();
+                        // The $_SESSION['cart'] is a 2D array with each element being an array of 
+                        // product id, product name, unit price, unit quantity, purchase quantity and total price
+                        // Add the product to the session cart
+                        // First check if the item is already in the cart
+                        $itemFound = false;
+                        foreach ($_SESSION['cart'] as $item) {
+                            if ($item['id'] == $_POST['productId']) {
+                                $itemFound = true;
                                 break;
                             }
                         }
-                    }
-                    break;
-                case 'Clear':
-                    // Clear to destroy the session cart
-                    unset($_SESSION['cart']);
-                    session_destroy();
-                    print_r($_SESSION['cart']);
-                    break;
-                case 'Checkout':
-                    break;
-                default:
-                    break;
+                        // If the item is not in the cart then add it
+                        if (!$itemFound) {
+                            array_push($_SESSION['cart'], array(
+                                "id" => $_POST['productId'],
+                                "name" => $_POST['productName'],
+                                "price" => $_POST['unitPrice'],
+                                "quantity" => $_POST['unitQuantity'],
+                                "purchase" => $_POST['purchaseQuantity'],
+                                "subTotal" => $_POST['purchaseQuantity'] * $_POST['unitPrice']
+                            ));
+                        } else {
+                            // If the item is in the cart then update the purchase quantity
+                            for ($i = 0; $i < sizeof($_SESSION['cart']); $i++) {
+                                if ($_SESSION['cart'][$i]['id'] == $_POST['productId']) {
+                                    $_SESSION['cart'][$i]['purchase'] += $_POST['purchaseQuantity'];
+                                    $_SESSION['cart'][$i]['subTotal'] = $_SESSION['cart'][$i]['purchase'] * $_SESSION['cart'][$i]['price'];
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    case 'Clear':
+                        // Clear to destroy the session cart
+                        unset($_SESSION['cart']);
+                        session_destroy();
+                        // Test to see if the session cart is destroy after unset
+                        if (isset($_SESSION['cart'])) print_r($_SESSION['cart']);
+                        break;
+                    case 'Checkout':
+                        break;
+                    default:
+                        break;
+                }
             }
             ?>
             <div class="card">
@@ -83,13 +86,13 @@
                     <form method="POST" action="checkout.php" target="top-right">
                         <?php
                         $total = 0;
-                        if (is_array($_SESSION['cart'])) {
+                        if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
                             foreach ($_SESSION['cart'] as $item) {
                                 echo "<p>" . $item['name'] . " * " . $item['purchase'] .
                                     "<span class='float-end'>" . "<b>" . "$" . $item['subTotal'] . "</b>" .
                                     "</span>" . "</p>";
                             }
-                        }
+                        } else print "<p class='text-center'>Your cart is empty.</p>";
                         ?>
                         <hr>
                         <p>
@@ -97,7 +100,7 @@
                             <span class="float-end">
                                 <b>
                                     <?php
-                                    if (is_array($_SESSION['cart'])) {
+                                    if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
                                         foreach ($_SESSION['cart'] as $item) {
                                             $total += $item['subTotal'];
                                         }
