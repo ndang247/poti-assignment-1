@@ -19,7 +19,7 @@
             </h1>
         </div>
         <div class="col-md-7 col-lg-8">
-            <form id="checkoutForm" method="POST" action="sendEmail.php" class="needs-validation" onsubmit="return isValidate(event)" novalidate>
+            <form id="checkoutForm" method="POST" action="confirmation.php" class="needs-validation" onsubmit="return isValidate(event)" novalidate>
                 <div id="checkout" class="row g-3">
                     <div class="col-sm-6">
                         <label for="firstName" class="form-label d-flex align-items-center">

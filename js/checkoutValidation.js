@@ -5,10 +5,10 @@ function isValidate(event) {
     var loadingBtn = document.getElementById("loadingBtn");
 
     // Checkout if checkoutForm exist
-    console.log(checkoutForm);
+    // console.log(checkoutForm);
     if (checkoutForm) {
         // If the form is not validated, prevent the form from being submitted
-        console.log(checkoutForm.checkValidity());
+        // console.log(checkoutForm.checkValidity());
         checkoutForm.classList.add('was-validated');
         if (!checkoutForm.checkValidity()) {
             event.preventDefault();

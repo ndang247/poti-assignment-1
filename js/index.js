@@ -24,7 +24,7 @@ function mo(obj) {
 }
 
 function hideImages() {
-    var subImages = document.querySelectorAll(".hide");
+    var subImages = document.querySelectorAll(".hidden");
     subImages.forEach(element => {
         element.style.display = "none";
     });
