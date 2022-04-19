@@ -27,7 +27,7 @@
                 $_SESSION['product_id'] = $_GET['id'];
 
                 // Connect to MySQL database
-                $conn = mysqli_connect('localhost', 'root', '', 'assignment1');
+                $conn = mysqli_connect('aa1tv0d0z1bqh2d.ch7n15u5bxoa.us-east-1.rds.amazonaws.com', 'uts', 'potiass1DB', 'assignment1');
 
                 // Check connection
                 if (!$conn) die("Connection failed: " . mysqli_connect_error());
