@@ -87,7 +87,7 @@
                         $total = 0;
                         if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
                             foreach ($_SESSION['cart'] as $item) {
-                                echo "<p>" . $item['name'] . " * " . $item['purchase'] .
+                                echo "<p>" . $item['name'] . " (" . $item['quantity'] . ") " . " * " . $item['purchase'] .
                                     "<span class='float-end'>" . "<b>" . "$" . $item['subTotal'] . "</b>" .
                                     "</span>" . "</p>";
                             }
