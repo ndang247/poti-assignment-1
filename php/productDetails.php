@@ -70,7 +70,8 @@
                     echo "<input name='productId' value=" . $_SESSION['product_id'] . " hidden>
                     <input name='productName' value=\"" . $row['product_name'] . "\" hidden>
                     <input name='unitPrice' value=" . $row['unit_price'] . " hidden>
-                    <input name='unitQuantity' value=\"" . $row['unit_quantity'] . "\" hidden>";
+                    <input name='unitQuantity' value=\"" . $row['unit_quantity'] . "\" hidden>
+                    <input id='stock' name='inStock' value=\"" . $row['in_stock'] . "\" hidden>";
                     echo "</table>";
                     echo "</form>";
                 }
