@@ -12,6 +12,6 @@ function quantityValidation() {
         return false;
     }
     stock = stock - quantity;
-    console.log(stock);
+    // console.log(stock);
     return true;
 }
