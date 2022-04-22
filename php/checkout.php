@@ -99,7 +99,7 @@
                             <option>Queensland</option>
                             <option>South Australia</option>
                             <option>Western Australia</option>
-                            <option>Northen Territory</option>
+                            <option>Northern Territory</option>
                             <option>Tasmania</option>
                         </select>
                         <div class="invalid-feedback">
